@@ -3,13 +3,34 @@
 @tailwind utilities;
 
 @layer base {
-
 }
 
 @layer components {
-
 }
 
 @layer utilities {
-  
+}
+
+html,
+body,
+#__next {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji",
+    "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+}
+
+#navbar,
+#sidebar {
+  z-index: 10;
+}
+
+main {
+  height: calc(100vh - 64px); /* Adjust according to the Navbar height */
 }

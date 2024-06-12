@@ -3,18 +3,12 @@
  */
 
 // get video by ID
-async function GET() {
-
-}
+async function GET() {}
 
 // update video by ID
-async function PUT() {
-
-}
+async function PUT() {}
 
 // delete video by ID
-async function DELETE() {
+async function DELETE() {}
 
-}
-
-export { GET,s PUT, DELETE };
+export { GET, PUT, DELETE };
