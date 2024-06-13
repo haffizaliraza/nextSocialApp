@@ -19,4 +19,4 @@ async function PUT() {
 
 }
 
-export { GET, POST }s;
+export { GET, POST };

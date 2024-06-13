@@ -17,4 +17,4 @@ async function DELETE() {
 
 }
 
-export { GET,s PUT, DELETE };
+export { GET, PUT, DELETE };
