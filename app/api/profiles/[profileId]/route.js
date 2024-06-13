@@ -12,4 +12,4 @@ async function PUT() {
 
 }
 
-export { GETs, PUT };
+export { GET, PUT };

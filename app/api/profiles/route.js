@@ -8,4 +8,4 @@ async function POST() {
 
 }
 
-export { GET, POSTs };
+export { GET, POST };
