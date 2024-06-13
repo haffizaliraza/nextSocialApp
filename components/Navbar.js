@@ -1,6 +1,8 @@
 "use client";
 
 import React, { useState } from "react";
+
+import Link from "next/link";
 import LoginModal from "../components/LoginModal";
 import SignUpModal from "../components/SignUpModal";
 
@@ -30,9 +32,11 @@ const Navbar = () => {
         <span className="ml-2 text-xl font-bold">BizSocial</span>
       </div>
       <div className="ml-auto flex space-x-4">
-        <button className="bg-white text-black border border-gray-300 px-4 py-2 rounded hover:bg-gray-100">
-          Upload
-        </button>
+        <Link href='/upload-video' alt='Upload a video'>
+          <button className="bg-white text-black border border-gray-300 px-4 py-2 rounded hover:bg-gray-100">
+            Upload
+          </button>
+        </Link>
         <button
           onClick={openLoginModal}
           className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600"
