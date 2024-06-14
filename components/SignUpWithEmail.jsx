@@ -1,4 +1,8 @@
+import { babelIncludeRegexes } from "next/dist/build/webpack-config";
+import nextAppLoader from "next/dist/build/webpack/loaders/next-app-loader";
+import { ZCOOL_QingKe_HuangYou } from "next/font/google";
 import React, { useState } from "react";
+import { FaTimes } from "react-icons/fa";
 
 const SignUpWithEmailModal = ({ onClose }) => {
   const [stage, setStage] = useState("email"); // email or details
@@ -107,13 +111,13 @@ const SignUpWithEmailModal = ({ onClose }) => {
 
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50 z-50">
-      <div className="bg-white p-8 rounded-lg w-full max-w-md">
+      <div className="relative bg-white p-8 rounded-lg w-full max-w-md">
         {renderModalContent()}
         <button
           onClick={onClose}
           className="absolute top-4 right-4 text-gray-600 hover:text-gray-800"
         >
-          Close
+          <FaTimes size={20} />
         </button>
       </div>
     </div>

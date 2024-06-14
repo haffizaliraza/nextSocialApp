@@ -3,8 +3,8 @@
 import React, { useState } from "react";
 
 import Link from "next/link";
-import LoginModal from "../components/LoginModal";
-import SignUpModal from "../components/SignUpModal";
+import LoginModal from "./LoginModal.jsx";
+import SignUpModal from "./SignUpModal.jsx";
 
 const Navbar = () => {
   const [showLoginModal, setShowLoginModal] = useState(false);
@@ -32,7 +32,7 @@ const Navbar = () => {
         <span className="ml-2 text-xl font-bold">BizSocial</span>
       </div>
       <div className="ml-auto flex space-x-4">
-        <Link href='/upload-video' alt='Upload a video'>
+        <Link href="/upload-video" alt="Upload a video">
           <button className="bg-white text-black border border-gray-300 px-4 py-2 rounded hover:bg-gray-100">
             Upload
           </button>

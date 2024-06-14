@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { FaTimes } from "react-icons/fa";
 import LoginWithEmailModel from "./LoginWithEmailModel";
 
 const LoginModal = ({ onSignUpClick, onClose }) => {
@@ -14,7 +15,13 @@ const LoginModal = ({ onSignUpClick, onClose }) => {
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-gray-900 bg-opacity-50">
-      <div className="bg-white p-8 rounded-lg max-w-md w-full">
+      <div className="relative bg-white p-8 rounded-lg max-w-md w-full">
+        <button
+          onClick={onClose}
+          className="absolute top-2 right-2 text-gray-600 hover:text-gray-800"
+        >
+          <FaTimes size={20} />
+        </button>
         <h2 className="text-xl font-bold mb-4">Login</h2>
         <button className="w-full bg-blue-600 text-white py-2 px-4 rounded-md mb-4">
           Continue with Google
@@ -38,12 +45,7 @@ const LoginModal = ({ onSignUpClick, onClose }) => {
             Sign up
           </a>
         </p>
-        <button
-          onClick={onClose}
-          className="w-full bg-gray-200 text-gray-800 py-2 px-4 rounded-md hover:bg-gray-300 mt-2"
-        >
-          Cancel
-        </button>
+
         {showEmailSignUpModal && (
           <LoginWithEmailModel onClose={closeEmailSignUpModal} />
         )}

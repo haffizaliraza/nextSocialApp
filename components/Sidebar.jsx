@@ -2,23 +2,20 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import {
-  HomeIcon,
-  SearchIcon,
-  UsersIcon,
-  UserIcon,
-  HeartIcon,
-} from "@heroicons/react/outline";
+import { FaHome } from "react-icons/fa";
+import { MdOutlineExplore } from "react-icons/md";
+import { LuUsers } from "react-icons/lu";
+import { ImProfile } from "react-icons/im";
 
 const Sidebar = () => {
   const pathname = usePathname();
 
   const menuItems = [
-    { name: "Home", path: "/", icon: HomeIcon },
-    { name: "For You", path: "/foryou", icon: HeartIcon },
-    { name: "Explore", path: "/explore", icon: SearchIcon },
-    { name: "Friends", path: "/friends", icon: UsersIcon },
-    { name: "Profile", path: "/profile", icon: UserIcon },
+    { name: "Home", path: "/", icon: FaHome },
+    { name: "For You", path: "/foryou", icon: FaHome },
+    { name: "Following", path: "/following", icon: LuUsers },
+    { name: "Explore", path: "/explore", icon: MdOutlineExplore },
+    { name: "Profile", path: "/profile", icon: ImProfile },
   ];
 
   return (
@@ -34,7 +31,7 @@ const Sidebar = () => {
                   pathname === item.path ? "bg-gray-200" : ""
                 }`}
               >
-                <item.icon className="h-6 w-6 mr-3" />
+                <item.icon className="mr-3" />
                 {item.name}
               </Link>
             </li>

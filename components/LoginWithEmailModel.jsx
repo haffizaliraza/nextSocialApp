@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { FaTimes } from "react-icons/fa";
 
 const LoginWithEmailModal = ({ onClose, onSignUpClick }) => {
   const [email, setEmail] = useState("");
@@ -14,7 +15,13 @@ const LoginWithEmailModal = ({ onClose, onSignUpClick }) => {
 
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50 z-50">
-      <div className="bg-white p-8 rounded-lg w-full max-w-md">
+      <div className="relative bg-white p-8 rounded-lg w-full max-w-md">
+        <button
+          onClick={onClose}
+          className="absolute top-4 right-4 text-gray-600 hover:text-gray-800"
+        >
+          <FaTimes size={20} />
+        </button>
         <div className="p-4">
           <h2 className="text-2xl font-bold mb-4">Log In with Email</h2>
           <form onSubmit={handleLogin}>
@@ -28,6 +35,7 @@ const LoginWithEmailModal = ({ onClose, onSignUpClick }) => {
             />
             <input
               type="password"
+              h
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               placeholder="Password"
@@ -41,13 +49,17 @@ const LoginWithEmailModal = ({ onClose, onSignUpClick }) => {
               Log In
             </button>
           </form>
+          <p className="text-center text-sm text-gray-600 mt-4">
+            Don't have an account?{" "}
+            <a
+              href="#"
+              className="text-blue-600 hover:underline"
+              onClick={onSignUpClick}
+            >
+              Sign up
+            </a>
+          </p>
         </div>
-        <button
-          onClick={onClose}
-          className="absolute top-4 right-4 text-gray-600 hover:text-gray-800"
-        >
-          Close
-        </button>
       </div>
     </div>
   );
