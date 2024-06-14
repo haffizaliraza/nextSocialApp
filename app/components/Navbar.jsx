@@ -3,8 +3,8 @@
 import React, { useState } from "react";
 
 import Link from "next/link";
-import LoginModal from "./LoginModal.jsx";
-import SignUpModal from "./SignUpModal.jsx";
+import LoginModal from "./LoginModal";
+import SignUpModal from "./SignUpModal";
 
 const Navbar = () => {
   const [showLoginModal, setShowLoginModal] = useState(false);

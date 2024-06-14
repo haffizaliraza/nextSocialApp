@@ -1,4 +1,4 @@
-import VideoCard from "../../components/VideoCard.jsx";
+import VideoCard from "../components/VideoCard";
 
 // Dummy video data
 const dummyVideos = [
