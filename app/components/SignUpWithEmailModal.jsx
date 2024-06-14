@@ -1,7 +1,5 @@
-import { babelIncludeRegexes } from "next/dist/build/webpack-config";
-import nextAppLoader from "next/dist/build/webpack/loaders/next-app-loader";
-import { ZCOOL_QingKe_HuangYou } from "next/font/google";
 import React, { useState } from "react";
+
 import { FaTimes } from "react-icons/fa";
 
 const SignUpWithEmailModal = ({ onClose }) => {

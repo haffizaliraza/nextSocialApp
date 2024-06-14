@@ -1,6 +1,7 @@
 import React, { useState } from "react";
+
 import { FaTimes } from "react-icons/fa";
-import SignUpWithEmail from "./SignUpWithEmail";
+import SignUpWithEmailModal from "./SignUpWithEmailModal";
 
 const SignUpModal = ({ onLoginClick, onClose }) => {
   const [showSignUpEmailModal, setShowSignUpEmailModal] = useState(false);
@@ -47,7 +48,7 @@ const SignUpModal = ({ onLoginClick, onClose }) => {
         </p>
 
         {showSignUpEmailModal && (
-          <SignUpWithEmail onClose={closeSignUpEmailModal} />
+          <SignUpWithEmailModal onClose={closeSignUpEmailModal} />
         )}
       </div>
     </div>
