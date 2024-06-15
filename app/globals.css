@@ -6,6 +6,13 @@
 }
 
 @layer components {
+  .error {
+    @apply text-red-700 font-semibold;
+  }
+
+  .error-input {
+    @apply bg-red-200;
+  }
 }
 
 @layer utilities {
