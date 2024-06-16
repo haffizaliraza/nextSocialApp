@@ -1,6 +1,5 @@
-"use client";
-
 import React, { useRef, useEffect } from "react";
+import { FiThumbsUp, FiMessageSquare, FiEye } from "react-icons/fi";
 
 const VideoCard = ({ video }) => {
   const videoRef = useRef(null);
@@ -48,72 +47,46 @@ const VideoCard = ({ video }) => {
 
   return (
     <div className="max-w-screen-lg mx-auto bg-white shadow-md rounded-lg overflow-hidden mb-4">
-      <video ref={videoRef} className="w-full" controls>
-        <source src={video.url} type="video/mp4" />
-        Your browser does not support the video tag.
-      </video>
+      <div className="relative">
+        <video ref={videoRef} className="w-full" controls>
+          <source src={video.url} type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
+        <div className="absolute top-0 right-0 m-4">
+          <button className="text-white rounded-full bg-gray-800 p-2">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-6 w-6"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M6 18L18 6M6 6l12 12"
+              />
+            </svg>
+          </button>
+        </div>
+      </div>
       <div className="p-4">
-        <div className="flex items-center mb-4">
-          <img
-            src={video.user.avatar}
-            alt={video.user.name}
-            className="w-12 h-12 rounded-full mr-4"
-          />
-          <div>
-            <h2 className="text-lg font-semibold">{video.user.name}</h2>
-            <p className="text-gray-500">{video.user.username}</p>
+        <h2 className="text-lg font-semibold mb-2">{video.title}</h2>
+        <p className="text-gray-500 text-sm mb-4">{video.description}</p>
+        <div className="flex items-center text-gray-500 space-x-4">
+          <div className="flex items-center">
+            <FiThumbsUp className="w-6 h-6 mr-1" />
+            <span>{video.likes} Likes</span>
           </div>
-        </div>
-        <div className="flex items-center text-gray-500 mb-2">
-          <svg
-            className="w-6 h-6 mr-1"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              d="M15 12a3 3 0 11-6 0 3 3 0 016 0zM9 17a4 4 0 00-4 4h8a4 4 0 00-4-4z"
-            ></path>
-          </svg>
-          <span>{video.likes}</span>
-        </div>
-        <div className="flex items-center text-gray-500 mb-2">
-          <svg
-            className="w-6 h-6 mr-1"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              d="M15 12a3 3 0 11-6 0 3 3 0 016 0zM9 17a4 4 0 00-4 4h8a4 4 0 00-4-4z"
-            ></path>
-          </svg>
-          <span>{video.comments}</span>
-        </div>
-        <div className="flex items-center text-gray-500">
-          <svg
-            className="w-6 h-6 mr-1"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              d="M15 12a3 3 0 11-6 0 3 3 0 016 0zM9 17a4 4 0 00-4 4h8a4 4 0 00-4-4z"
-            ></path>
-          </svg>
-          <span>{video.shares}</span>
+          <div className="flex items-center">
+            <FiMessageSquare className="w-6 h-6 mr-1" />
+            <span>{video.comments} Comments</span>
+          </div>
+          <div className="flex items-center">
+            <FiEye className="w-6 h-6 mr-1" />
+            <span>{video.views} Views</span>
+          </div>
         </div>
       </div>
     </div>
