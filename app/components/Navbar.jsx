@@ -33,7 +33,21 @@ const Navbar = () => {
       </div>
       <div className="ml-auto flex space-x-4">
         <Link href="/upload-video" alt="Upload a video">
-          <button className="bg-white text-black border border-gray-300 px-4 py-2 rounded hover:bg-gray-100">
+          <button className="bg-white flex text-black border border-gray-300 px-4 py-2 rounded hover:bg-gray-100">
+            <svg
+              className="w-6 h-6 mr-2"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M12 6v6m0 0v6m0-6h6m-6 0H6"
+              ></path>
+            </svg>
             Upload
           </button>
         </Link>

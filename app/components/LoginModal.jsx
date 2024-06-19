@@ -11,7 +11,10 @@ const LoginModal = ({ onSignUpClick, onClose }) => {
 
   const closeEmailSignUpModal = () => {
     setShowEmailSignUpModal(false);
+    onClose();
   };
+
+  const LoginInSucess = () => {};
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-gray-900 bg-opacity-50">
@@ -47,7 +50,10 @@ const LoginModal = ({ onSignUpClick, onClose }) => {
         </p>
 
         {showEmailSignUpModal && (
-          <LoginWithEmailModel onClose={closeEmailSignUpModal} />
+          <LoginWithEmailModel
+            onClose={closeEmailSignUpModal}
+            onSignUpClick={LoginInSucess}
+          />
         )}
       </div>
     </div>

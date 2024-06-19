@@ -3,6 +3,8 @@ import "./globals.css";
 import { Inter } from "next/font/google";
 import Navbar from "./components/Navbar";
 import Sidebar from "./components/Sidebar";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -20,6 +22,7 @@ export default function RootLayout({ children }) {
           <div className="flex-1 flex flex-col">
             <Navbar />
             <main className="flex-1 p-4 overflow-y-auto">{children}</main>
+            <ToastContainer />
           </div>
         </div>
       </body>

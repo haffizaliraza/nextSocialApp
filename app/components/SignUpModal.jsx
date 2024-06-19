@@ -1,13 +1,21 @@
 import React, { useState } from "react";
+import { useRouter } from "next/navigation";
 
 import { FaTimes } from "react-icons/fa";
 import SignUpWithEmailModal from "./SignUpWithEmailModal";
 
 const SignUpModal = ({ onLoginClick, onClose }) => {
   const [showSignUpEmailModal, setShowSignUpEmailModal] = useState(false);
+  const router = useRouter();
 
   const openSignUpEmailModal = () => {
     setShowSignUpEmailModal(true);
+  };
+
+  const handleSignUpSuccess = () => {
+    setShowSignUpEmailModal(false);
+    onClose();
+    router.push("/");
   };
 
   const closeSignUpEmailModal = () => {
@@ -48,7 +56,10 @@ const SignUpModal = ({ onLoginClick, onClose }) => {
         </p>
 
         {showSignUpEmailModal && (
-          <SignUpWithEmailModal onClose={closeSignUpEmailModal} />
+          <SignUpWithEmailModal
+            onClose={closeSignUpEmailModal}
+            onSignUpSuccess={handleSignUpSuccess}
+          />
         )}
       </div>
     </div>

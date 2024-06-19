@@ -16,6 +16,7 @@ export default function VideoUpload() {
   const [blob, setBlob] = useState(null);
   const [loading, setLoading] = useState(false);
   const [isClient, setIsClient] = useState(false);
+  const [videoPreview, setVideoPreview] = useState(null);
   const router = useRouter();
 
   useEffect(() => {
@@ -29,6 +30,7 @@ export default function VideoUpload() {
     const file = fileList[0];
     const filePath = `videos/${file.name}`;
 
+    setVideoPreview(URL.createObjectURL(file));
     const newBlob = await upload(filePath, file, {
       access: "public",
       handleUploadUrl: "/api/videos/upload",
@@ -68,6 +70,11 @@ export default function VideoUpload() {
     if (isClient) {
       router.back();
     }
+  };
+
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    setVideoPreview(URL.createObjectURL(file));
   };
 
   return (
@@ -116,17 +123,39 @@ export default function VideoUpload() {
               </span>
             )}
           </div>
-
+          {videoPreview && (
+            <video height="240" className="mt-2 w-full rounded-md" controls>
+              <source src={videoPreview} type="video/mp4" />
+            </video>
+          )}
           <div className="flex flex-col">
-            <input
-              id="file"
-              type="file"
-              accept="video/mp4"
-              className={`border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-500 ${
-                errors.file && "border-red-500"
-              }`}
-              {...register("file", { required: true })}
-            />
+            <label className="border border-gray-300 rounded-md px-3 py-2 mt-2 w-full flex items-center justify-center cursor-pointer">
+              <svg
+                className="w-6 h-6 mr-2"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M12 6v6m0 0v6m0-6h6m-6 0H6"
+                ></path>
+              </svg>
+              <span>Upload</span>
+              <input
+                id="file"
+                type="file"
+                accept="video/mp4"
+                className={`hidden border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-500 ${
+                  errors.file && "border-red-500"
+                }`}
+                {...register("file", { required: true })}
+                onChange={handleFileChange}
+              />
+            </label>
             {errors.file && (
               <span className="text-red-500 text-sm mt-1">
                 {showFormError(
