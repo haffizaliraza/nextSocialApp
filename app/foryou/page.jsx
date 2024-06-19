@@ -1,15 +1,24 @@
 "use client";
-
 import { useEffect, useState } from "react";
 import VideoCard from "../components/VideoCard";
+import { useRouter } from "next/navigation";
+import { useAuth } from "../context/AuthContext";
 
 const ForYou = () => {
   const [videos, setVideos] = useState([]);
   const [loading, setLoading] = useState(true);
+  const { user } = useAuth();
+  const router = useRouter();
 
   useEffect(() => {
     const fetchVideos = async () => {
       try {
+        if (!user) {
+          // Redirect to login if user is not authenticated
+          router.push("/login");
+          return;
+        }
+
         const response = await fetch("/api/videos");
         const { data } = await response.json();
         setVideos(data);
@@ -21,7 +30,11 @@ const ForYou = () => {
     };
 
     fetchVideos();
-  }, []);
+  }, [user]);
+
+  if (!user) {
+    return null; // Or render a loading indicator or login prompt
+  }
 
   return (
     <div className="p-4">

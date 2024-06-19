@@ -1,6 +1,38 @@
 "use client";
+import { useEffect } from "react";
+import { useRouter } from "next/navigation";
+import { useAuth } from "../context/AuthContext";
 
 const Following = () => {
+  const { user } = useAuth();
+  const router = useRouter();
+
+  useEffect(() => {
+    const fetchVideos = async () => {
+      try {
+        if (!user) {
+          // Redirect to login if user is not authenticated
+          router.push("/login");
+          return;
+        }
+
+        const response = await fetch("/api/videos");
+        const { data } = await response.json();
+        setVideos(data);
+      } catch (error) {
+        console.error("Error fetching videos:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchVideos();
+  }, [user]);
+
+  if (!user) {
+    return null; // Or render a loading indicator or login prompt
+  }
+
   // Example data for followed users/content
   const followedItems = [
     {

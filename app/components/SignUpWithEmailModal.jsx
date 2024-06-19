@@ -70,8 +70,6 @@ const SignUpWithEmailModal = ({ onClose, onSignUpSuccess }) => {
       handleUploadUrl: "/api/videos/upload",
     });
 
-    debugger;
-
     if (newBlob) {
       try {
         const response = await fetch("/api/auth/register", {

@@ -1,14 +1,15 @@
 "use client";
 
 import React, { useState } from "react";
-
 import Link from "next/link";
 import LoginModal from "./LoginModal";
 import SignUpModal from "./SignUpModal";
+import { useAuth } from "../context/AuthContext";
 
 const Navbar = () => {
   const [showLoginModal, setShowLoginModal] = useState(false);
   const [showSignUpModal, setShowSignUpModal] = useState(false);
+  const { user, logout } = useAuth();
 
   const openSignUpModal = () => {
     setShowLoginModal(false);
@@ -28,7 +29,6 @@ const Navbar = () => {
   return (
     <nav className="bg-white border-b border-gray-200 px-4 py-2 flex items-center justify-between">
       <div className="flex items-center">
-        {/* <Image src="/logo.png" alt="Logo" width={40} height={40} /> */}
         <span className="ml-2 text-xl font-bold">BizSocial</span>
       </div>
       <div className="ml-auto flex space-x-4">
@@ -51,12 +51,21 @@ const Navbar = () => {
             Upload
           </button>
         </Link>
-        <button
-          onClick={openLoginModal}
-          className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600"
-        >
-          Log In
-        </button>
+        {user ? (
+          <button
+            onClick={logout}
+            className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600"
+          >
+            Log Out
+          </button>
+        ) : (
+          <button
+            onClick={openLoginModal}
+            className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600"
+          >
+            Log In
+          </button>
+        )}
       </div>
       {showLoginModal && (
         <LoginModal onSignUpClick={openSignUpModal} onClose={closeModals} />

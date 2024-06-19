@@ -33,7 +33,10 @@ async function POST(request) {
     const user = await validateUserCredentials(emailOrUsername, password);
     if (user) {
       // Authentication successful
-      return Response.json({ message: "Login successful" }, { status: 200 });
+      return Response.json(
+        { message: "Login successful", user: user },
+        { status: 200 }
+      );
     } else {
       // Authentication failed
       return Response.json(

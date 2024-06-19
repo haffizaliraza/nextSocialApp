@@ -1,9 +1,15 @@
+"use client";
+
+// components/LoginModal.js
+
 import React, { useState } from "react";
 import { FaTimes } from "react-icons/fa";
 import LoginWithEmailModel from "./LoginWithEmailModel";
+import { useAuth } from "../context/AuthContext";
 
 const LoginModal = ({ onSignUpClick, onClose }) => {
   const [showEmailSignUpModal, setShowEmailSignUpModal] = useState(false);
+  const { login } = useAuth();
 
   const openLoginWithEmailModel = () => {
     setShowEmailSignUpModal(true);
@@ -14,7 +20,10 @@ const LoginModal = ({ onSignUpClick, onClose }) => {
     onClose();
   };
 
-  const LoginInSucess = () => {};
+  const LoginInSucess = (userData) => {
+    login(userData);
+    onClose();
+  };
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-gray-900 bg-opacity-50">

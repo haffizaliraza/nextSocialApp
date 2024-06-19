@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { FaTimes } from "react-icons/fa";
 import { toast } from "react-toastify";
+import { useAuth } from "../context/AuthContext";
 
 const LoginWithEmailModal = ({ onClose, onSignUpClick }) => {
   const [emailOrUsername, setEmailOrUsername] = useState("");
@@ -8,6 +9,7 @@ const LoginWithEmailModal = ({ onClose, onSignUpClick }) => {
   const [apiError, setApiError] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
   const [loading, setLoading] = useState(false);
+  const { login } = useAuth(); // Use the login function from AuthContext
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -29,6 +31,7 @@ const LoginWithEmailModal = ({ onClose, onSignUpClick }) => {
       if (response.ok) {
         setSuccessMessage("Login successful");
         toast.success("Login successful");
+        login(result.user); // Call login with the user's data
         onClose();
       } else {
         setApiError(result.error || "An error occurred during login.");
