@@ -1,10 +1,12 @@
 "use client";
 
 import { createContext, useContext, useState } from "react";
+import { useRouter } from "next/navigation";
 
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
+  const router = useRouter();
   const [user, setUser] = useState(null); // Initialize with null or initial user state
 
   // Example of login function
@@ -17,6 +19,7 @@ export const AuthProvider = ({ children }) => {
   const logout = () => {
     // Logic to clear user session, e.g., API call
     setUser(null); // Clear authenticated user data
+    router.push("/");
   };
 
   return (

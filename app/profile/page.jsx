@@ -9,30 +9,12 @@ const ProfilePage = () => {
   const router = useRouter();
 
   useEffect(() => {
-    const fetchVideos = async () => {
-      try {
-        if (!user) {
-          // Redirect to login if user is not authenticated
-          router.push("/login");
-          return;
-        }
-
-        const response = await fetch("/api/videos");
-        const { data } = await response.json();
-        setVideos(data);
-      } catch (error) {
-        console.error("Error fetching videos:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchVideos();
+    if (!user) {
+      // Redirect to login if user is not authenticated
+      router.push("/login");
+      return;
+    }
   }, [user]);
-
-  if (!user) {
-    return null; // Or render a loading indicator or login prompt
-  }
 
   return (
     <div className="min-h-screen bg-gray-100 flex flex-col items-center">

@@ -6,8 +6,10 @@ import { upload } from "@vercel/blob/client";
 import { showFormError } from "@/utils/helpers";
 import { AiOutlineClose } from "react-icons/ai";
 import { useRouter } from "next/navigation";
+import { useAuth } from "../context/AuthContext";
 
 export default function VideoUpload() {
+  const { user } = useAuth();
   const {
     register,
     handleSubmit,
@@ -46,7 +48,7 @@ export default function VideoUpload() {
           Accept: "application/json",
         },
         body: JSON.stringify({
-          userId: "clxf73p580000elr0dkoduysx", // TODO: Replace this value with the CURRENT USER ID
+          userId: user.id,
           url: newBlob.url,
           title,
           description,
@@ -58,6 +60,7 @@ export default function VideoUpload() {
       if (error) {
         console.error(error);
       } else {
+        toast.success("New Video Uploaded");
         // Redirect to "For You" page after successful upload
         router.push("/foryou");
       }

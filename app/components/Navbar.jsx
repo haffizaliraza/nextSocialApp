@@ -11,8 +11,6 @@ const Navbar = () => {
   const [showSignUpModal, setShowSignUpModal] = useState(false);
   const { user, logout } = useAuth();
 
-  console.log(user);
-
   const openSignUpModal = () => {
     setShowLoginModal(false);
     setShowSignUpModal(true);

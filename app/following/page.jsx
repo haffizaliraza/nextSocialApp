@@ -8,30 +8,12 @@ const Following = () => {
   const router = useRouter();
 
   useEffect(() => {
-    const fetchVideos = async () => {
-      try {
-        if (!user) {
-          // Redirect to login if user is not authenticated
-          router.push("/login");
-          return;
-        }
-
-        const response = await fetch("/api/videos");
-        const { data } = await response.json();
-        setVideos(data);
-      } catch (error) {
-        console.error("Error fetching videos:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchVideos();
+    if (!user) {
+      // Redirect to login if user is not authenticated
+      router.push("/login");
+      return;
+    }
   }, [user]);
-
-  if (!user) {
-    return null; // Or render a loading indicator or login prompt
-  }
 
   // Example data for followed users/content
   const followedItems = [

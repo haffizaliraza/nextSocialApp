@@ -8,7 +8,6 @@ async function GET(request, response) {
 
 const validateUserCredentials = async (emailOrUsername, password) => {
   // Try to find the user by email
-  console.log(emailOrUsername, password);
   let user = await prisma.user.findUnique({
     where: { email: emailOrUsername },
   });

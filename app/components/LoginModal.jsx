@@ -6,10 +6,12 @@ import React, { useState } from "react";
 import { FaTimes } from "react-icons/fa";
 import LoginWithEmailModel from "./LoginWithEmailModel";
 import ForgotPasswordModal from "./ForgotPasswordModal";
+import { useRouter } from "next/navigation";
 
 const LoginModal = ({ onSignUpClick, onClose }) => {
   const [showEmailSignUpModal, setShowEmailSignUpModal] = useState(false);
   const [showForgotPasswordModal, setShowForgotPasswordModal] = useState(false);
+  const router = useRouter();
 
   const openLoginWithEmailModal = () => {
     setShowEmailSignUpModal(true);
@@ -29,11 +31,15 @@ const LoginModal = ({ onSignUpClick, onClose }) => {
     onClose();
   };
 
+  const closeModel = () => {
+    router.push("/");
+  };
+
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-gray-900 bg-opacity-50">
       <div className="relative bg-white p-8 rounded-lg max-w-md w-full">
         <button
-          onClick={onClose}
+          onClick={closeModel}
           className="absolute top-2 right-2 text-gray-600 hover:text-gray-800"
         >
           <FaTimes size={20} />
