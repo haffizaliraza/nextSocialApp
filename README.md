@@ -1,4 +1,4 @@
-Next.js project for BizSocial social media platform
+Next.js project for Peerbubble social media platform
 
 ## Getting Started
 
@@ -31,4 +31,3 @@ The following NPM packages are required dependencies:
 ## Environemnt variables
 
 Ask admin for the .env file configurations.
-

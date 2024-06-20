@@ -11,6 +11,8 @@ const Navbar = () => {
   const [showSignUpModal, setShowSignUpModal] = useState(false);
   const { user, logout } = useAuth();
 
+  console.log(user);
+
   const openSignUpModal = () => {
     setShowLoginModal(false);
     setShowSignUpModal(true);
@@ -29,7 +31,7 @@ const Navbar = () => {
   return (
     <nav className="bg-white border-b border-gray-200 px-4 py-2 flex items-center justify-between">
       <div className="flex items-center">
-        <span className="ml-2 text-xl font-bold">BizSocial</span>
+        <span className="ml-2 text-xl font-bold">PeerBubble</span>
       </div>
       <div className="ml-auto flex space-x-4">
         <Link href="/upload-video" alt="Upload a video">

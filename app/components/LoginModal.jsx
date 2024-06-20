@@ -5,13 +5,13 @@
 import React, { useState } from "react";
 import { FaTimes } from "react-icons/fa";
 import LoginWithEmailModel from "./LoginWithEmailModel";
-import { useAuth } from "../context/AuthContext";
+import ForgotPasswordModal from "./ForgotPasswordModal";
 
 const LoginModal = ({ onSignUpClick, onClose }) => {
   const [showEmailSignUpModal, setShowEmailSignUpModal] = useState(false);
-  const { login } = useAuth();
+  const [showForgotPasswordModal, setShowForgotPasswordModal] = useState(false);
 
-  const openLoginWithEmailModel = () => {
+  const openLoginWithEmailModal = () => {
     setShowEmailSignUpModal(true);
   };
 
@@ -20,8 +20,12 @@ const LoginModal = ({ onSignUpClick, onClose }) => {
     onClose();
   };
 
-  const LoginInSucess = (userData) => {
-    login(userData);
+  const openForgotPasswordModal = () => {
+    setShowForgotPasswordModal(true);
+  };
+
+  const closeForgotPasswordModal = () => {
+    setShowForgotPasswordModal(false);
     onClose();
   };
 
@@ -42,12 +46,22 @@ const LoginModal = ({ onSignUpClick, onClose }) => {
           Continue with Facebook
         </button>
         <button
-          onClick={openLoginWithEmailModel}
+          onClick={openLoginWithEmailModal}
           className="w-full bg-gray-200 text-gray-800 py-2 px-4 rounded-md mb-4"
         >
           Login with Email
         </button>
         <p className="text-center text-sm text-gray-600">
+          Forgot your password?{" "}
+          <a
+            href="#"
+            className="text-blue-600 hover:underline"
+            onClick={openForgotPasswordModal}
+          >
+            Reset it here
+          </a>
+        </p>
+        <p className="text-center text-sm text-gray-600 mt-4">
           Don't have an account?{" "}
           <a
             href="#"
@@ -61,8 +75,12 @@ const LoginModal = ({ onSignUpClick, onClose }) => {
         {showEmailSignUpModal && (
           <LoginWithEmailModel
             onClose={closeEmailSignUpModal}
-            onSignUpClick={LoginInSucess}
+            onSignUpClick={onSignUpClick}
           />
+        )}
+
+        {showForgotPasswordModal && (
+          <ForgotPasswordModal onClose={closeForgotPasswordModal} />
         )}
       </div>
     </div>

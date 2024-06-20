@@ -20,7 +20,7 @@ const Sidebar = () => {
 
   return (
     <div className="w-64 bg-white h-full shadow-md">
-      <div className="p-4 font-bold text-xl">BizSocial</div>
+      <div className="p-4 font-bold text-xl">Peerbubble</div>
       <nav className="mt-4">
         <ul className="space-y-2">
           {menuItems.map((item) => (
