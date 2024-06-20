@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+
 import { FaTimes } from "react-icons/fa";
 import { upload } from "@vercel/blob/client";
 
@@ -67,7 +68,7 @@ const SignUpWithEmailModal = ({ onClose, onSignUpSuccess }) => {
 
     const newBlob = await upload(filePath, file, {
       access: "public",
-      handleUploadUrl: "/api/videos/upload",
+      handleUploadUrl: "/api/avatars/upload",
     });
 
     if (newBlob) {
