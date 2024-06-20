@@ -63,7 +63,7 @@ const SignUpWithEmailModal = ({ onClose, onSignUpSuccess }) => {
     setErrors({});
 
     const file = avatar[0];
-    const filePath = `users/images/${file.name}`;
+    const filePath = `avatars/${file.name}`;
 
     const newBlob = await upload(filePath, file, {
       access: "public",

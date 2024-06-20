@@ -4,9 +4,11 @@
 
 import React, { useState } from "react";
 import { FaTimes } from "react-icons/fa";
+import { useRouter } from "next/navigation";
+import GoogleButton from "react-google-button";
+import { signIn } from "next-auth/react";
 import LoginWithEmailModel from "./LoginWithEmailModel";
 import ForgotPasswordModal from "./ForgotPasswordModal";
-import { useRouter } from "next/navigation";
 
 const LoginModal = ({ onSignUpClick, onClose }) => {
   const [showEmailSignUpModal, setShowEmailSignUpModal] = useState(false);
@@ -35,6 +37,12 @@ const LoginModal = ({ onSignUpClick, onClose }) => {
     router.push("/");
   };
 
+  const buttonStyle = "p-10 flex items-center justify-center py-0 ";
+  const googleButtonStyle =
+    "border border-gray-300 bg-white text-gray-800 hover:bg-gray-100";
+  const facebookButtonStyle = "bg-blue-900 text-white hover:bg-blue-800 h-12";
+  const emailButtonStyle = "bg-gray-200 text-gray-800 hover:bg-gray-300 h-12";
+
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-gray-900 bg-opacity-50">
       <div className="relative bg-white p-8 rounded-lg max-w-md w-full">
@@ -44,39 +52,51 @@ const LoginModal = ({ onSignUpClick, onClose }) => {
         >
           <FaTimes size={20} />
         </button>
-        <h2 className="text-xl font-bold mb-4">Login</h2>
-        <button className="w-full bg-blue-600 text-white py-2 px-4 rounded-md mb-4">
-          Continue with Google
-        </button>
-        <button className="w-full bg-blue-900 text-white py-2 px-4 rounded-md mb-4">
-          Continue with Facebook
-        </button>
-        <button
-          onClick={openLoginWithEmailModal}
-          className="w-full bg-gray-200 text-gray-800 py-2 px-4 rounded-md mb-4"
-        >
-          Login with Email
-        </button>
-        <p className="text-center text-sm text-gray-600">
-          Forgot your password?{" "}
-          <a
-            href="#"
-            className="text-blue-600 hover:underline"
-            onClick={openForgotPasswordModal}
+        <div className="flex flex-col items-center space-y-4">
+          <div className={buttonStyle}>
+            <GoogleButton
+              type="dark"
+              onClick={() => {
+                signIn("google", {
+                  callbackUrl: "http://localhost:3000/api/auth/",
+                });
+              }}
+            />
+          </div>
+
+          <button className={`${buttonStyle} ${facebookButtonStyle}`}>
+            Sign In with Facebook
+          </button>
+
+          <button
+            onClick={openLoginWithEmailModal}
+            className={`${buttonStyle} ${emailButtonStyle}`}
           >
-            Reset it here
-          </a>
-        </p>
-        <p className="text-center text-sm text-gray-600 mt-4">
-          Don't have an account?{" "}
-          <a
-            href="#"
-            className="text-blue-600 hover:underline"
-            onClick={onSignUpClick}
-          >
-            Sign up
-          </a>
-        </p>
+            Sign In with Username
+          </button>
+
+          <p className="text-center text-sm text-gray-600">
+            Forgot your password?{" "}
+            <a
+              href="#"
+              className="text-blue-600 hover:underline"
+              onClick={openForgotPasswordModal}
+            >
+              Reset it here
+            </a>
+          </p>
+
+          <p className="text-center text-sm text-gray-600 mt-4">
+            Don't have an account?{" "}
+            <a
+              href="#"
+              className="text-blue-600 hover:underline"
+              onClick={onSignUpClick}
+            >
+              Sign up
+            </a>
+          </p>
+        </div>
 
         {showEmailSignUpModal && (
           <LoginWithEmailModel
