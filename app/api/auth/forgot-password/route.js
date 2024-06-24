@@ -1,4 +1,5 @@
 import nodemailer from "nodemailer";
+import crypto from "crypto";
 import prisma from "@/lib/prisma"; // Ensure you have this configured for your Prisma setup
 
 async function GET(request, response) {
@@ -13,26 +14,43 @@ async function POST(request) {
     return Response.json({ error: "Email is required" }, { status: 400 });
   }
 
-  // You should add logic here to generate a password reset token and save it to your database
-  // For this example, we're going to skip this step
+  // Generate a secure token
+  const token = crypto.randomBytes(32).toString("hex");
 
-  // Send the email
-  const transporter = nodemailer.createTransport({
-    service: "Gmail",
-    auth: {
-      user: process.env.EMAIL_USER,
-      pass: process.env.EMAIL_PASSWORD,
-    },
-  });
-
-  const mailOptions = {
-    from: process.env.EMAIL_USER,
-    to: email,
-    subject: "Password Reset",
-    text: "Click here to reset your password: http://localhost:3000/reset-password", // Add the actual password reset link
-  };
+  // Set token expiration time (e.g., 1 hour)
+  const tokenExpiration = new Date();
+  tokenExpiration.setHours(tokenExpiration.getHours() + 1);
 
   try {
+    // Save the token and its expiration to the user's record in the database
+    const user = await prisma.user.update({
+      where: { email },
+      data: {
+        resetToken: token,
+        resetTokenExpiration: tokenExpiration,
+      },
+    });
+
+    if (!user) {
+      return Response.json({ error: "User not found" }, { status: 404 });
+    }
+
+    // Send the email
+    const transporter = nodemailer.createTransport({
+      service: "Gmail",
+      auth: {
+        user: process.env.EMAIL_USER,
+        pass: process.env.EMAIL_PASSWORD,
+      },
+    });
+
+    const mailOptions = {
+      from: process.env.EMAIL_USER,
+      to: email,
+      subject: "Password Reset",
+      text: `Click here to reset your password: http://localhost:3000/reset-password/?token=${token}`, // Add the actual password reset link
+    };
+
     await transporter.sendMail(mailOptions);
     return Response.json(
       { message: "Password reset email sent" },

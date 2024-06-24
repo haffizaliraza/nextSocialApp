@@ -30,6 +30,8 @@ model User {
   comments  Comment[]
   followers Follow[]  @relation("Following")
   following Follow[]  @relation("Follower")
+  resetToken String?
+  resetTokenExpiration DateTime?
 
   @@index([username], name: "username_idx")
 }

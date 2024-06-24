@@ -33,6 +33,10 @@ const LoginModal = ({ onSignUpClick, onClose }) => {
     onClose();
   };
 
+  const GoogleLoginButtonClick = () => {
+    signIn("google");
+  };
+
   const closeModel = () => {
     router.push("/");
   };
@@ -54,14 +58,7 @@ const LoginModal = ({ onSignUpClick, onClose }) => {
         </button>
         <div className="flex flex-col items-center space-y-4">
           <div className={buttonStyle}>
-            <GoogleButton
-              type="dark"
-              onClick={() => {
-                signIn("google", {
-                  callbackUrl: "http://localhost:3000/api/auth/",
-                });
-              }}
-            />
+            <GoogleButton type="dark" onClick={GoogleLoginButtonClick} />
           </div>
 
           <button className={`${buttonStyle} ${facebookButtonStyle}`}>

@@ -1,6 +1,6 @@
 // components/ResetPassword.js
 import React, { useState } from "react";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
 
 const ResetPassword = () => {
@@ -9,7 +9,7 @@ const ResetPassword = () => {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const router = useRouter();
-  const { token } = router.query;
+  const token = router.query;
 
   const handleSubmit = async (e) => {
     e.preventDefault();
